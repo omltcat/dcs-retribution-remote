@@ -1,0 +1,30 @@
+server:
+  # Your DCS server "Missions" folder location (Change this to your own path)
+  dcs_mission_dir: C:\Users\<--YOUR_USERNAME-->\Saved Games\DCS.release_server\Missions
+
+  # Your DCS_server.exe location (Change this to your own path)
+  dcs_server_exe: C:\Program Files\Eagle Dynamics\DCS World Server\bin\DCS_server.exe
+
+  # Maximum time before the server is stopped, in case your user forgot to stop the server.
+  max_running_time: 0  # Set to 0 to disable
+  # NOTE: Not implemented yet
+
+users:
+  # List of users and their passwords used to access the remote app
+  # Change the usernames and passwords to your own!!!
+  - username: user1
+    password: retribution
+  - username: user2
+    password: liberation
+  # Add more users as needed
+
+#### You don't need to change anything below unless you know what you're doing ####
+app:
+  host: "0.0.0.0"
+  port: 9099   # Make sure this port is open in your firewall and port forwarded in your router
+  https: false # Set to true to use HTTPS (cert will be generated automatically)
+  debug: false
+  allowed_filenames:
+    - retribution_nextturn.miz
+    - liberation_nextturn.miz
+  allowed_max_size: 0 # (in MB) Limit upload size, 0 to disable

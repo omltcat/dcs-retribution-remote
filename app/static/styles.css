@@ -1,0 +1,217 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1D2731; /* Dark background */
+    color: #ffffff; /* Light text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Header */
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+/* Main Content */
+main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #2D3E50; /* Slightly lighter dark background */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    padding: 40px;
+    border-radius: 50px;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+    /* width: 90%;
+    max-width: 500px; */
+    width: 340px;
+    height: 100px;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaaaaa;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+
+/* Action Buttons */
+.action-button {
+    background-color: #48719D;
+    border: none;
+    border-radius: 30px;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: #ffffff 3px solid;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.action-button img {
+    width: 80%;
+    height: 80%;
+    filter: invert(100%) brightness(100%);
+}
+
+.action-button:hover {
+    transform: scale(1.05)
+}
+
+/* Tooltip Styles */
+.action-button::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%; /* Position above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #48719D;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    white-space: pre-wrap; /* Enable line breaks */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5); 
+    font-family: monospace;
+}
+
+.action-button:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Disabled Button Styles */
+.action-button.disabled {
+    background-color: #a9a9a9; /* Gray background */
+    cursor: not-allowed; /* Show "not allowed" cursor */
+    pointer-events: none; /* Disable all interactions */
+}
+
+.action-button.disabled img {
+    filter: grayscale(100%); /* Make the icon grayscale */
+}
+
+/* Power Button Colors */
+#power-button.on {
+    background-color: #82A466; /* Green when server is on */
+}
+
+#power-button.off {
+    background-color: #9E3232; /* Red when server is off */
+}
+
+#power-button::after {
+    white-space: nowrap; /* Prevent line breaks in tooltip */
+}
+
+/* Refresh Button Container */
+.refresh-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Refresh Button Container */
+.refresh-container {
+    display: flex;
+    justify-content: center;
+}
+
+/* Icon Button */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.icon-button img {
+    width: 50px; /* Adjust icon size */
+    height: 50px;
+    filter: invert(100%) brightness(100%); /* White icon */
+}
+
+.icon-button:hover {
+    transform: scale(1.1) rotate(-360deg);
+}
+
+/* Spinning animation for the refresh button */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 300px;
+}
+
+input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #48719D;
+    color: #ffffff;
+    font-size: 18px;
+    width: 256px;
+    border: 2px solid #ffffff;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #ffffff; /* Placeholder text color */
+    opacity: 0.8;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #4caf50;
+}

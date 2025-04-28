@@ -1,0 +1,11 @@
+.vscode/
+venv/
+logs/
+data/
+config.yaml
+
+__pycache__/
+*.pyc
+
+state.json
+test.lua
