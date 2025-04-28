@@ -6,13 +6,20 @@ Initializes the app, includes routes, and starts the server.
 from fastapi import FastAPI
 from fastapi.requests import Request
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from slowapi.middleware import SlowAPIMiddleware
+from slowapi.errors import RateLimitExceeded
 from app.config import Config
 from app.routes import router_spa, router_api_v1
 from app.https import cert_file, key_file
 from app.logger import logger
-from pathlib import Path
 import logging
 import asyncio
+
+DEBUG_DELAY = 1  # seconds, simulate slow response
+RATE_LIMITE = "100/hour"
 
 # Configs
 host = Config.get("app.host")
@@ -32,13 +39,27 @@ app.include_router(router_api_v1, tags=["API"])
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.mount("/partials", StaticFiles(directory="app/templates/partials"), name="partials")
 
+# Set up rate limiting
+limiter = Limiter(
+    key_func=get_remote_address,
+    default_limits=[RATE_LIMITE],
+)
+app.state.limiter = limiter
+app.add_exception_handler(
+    RateLimitExceeded,
+    lambda request, exc: JSONResponse(
+        status_code=429, content={"detail": "Rate limit exceeded"}
+    ),
+)
+app.add_middleware(SlowAPIMiddleware)
 
-if debug:
+
+if debug and DEBUG_DELAY > 0:
     @app.middleware("http")
     async def add_delay_middleware(request: Request, call_next):
         # Apply delay only to routes starting with "/api"
         if request.url.path.startswith(("/api", "/api/v1/files", "/api/v1/server")):
-            await asyncio.sleep(1)
+            await asyncio.sleep(DEBUG_DELAY)
         return await call_next(request)
 
 if __name__ == "__main__":
