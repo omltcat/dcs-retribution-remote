@@ -215,3 +215,14 @@ input:focus {
     outline: none;
     box-shadow: 0 0 5px #4caf50;
 }
+
+/* Link styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
