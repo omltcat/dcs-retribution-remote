@@ -13,9 +13,9 @@ users:
   # List of users and their passwords used to access the remote app
   # Change the usernames and passwords to your own!!!
   - username: user1
-    password: retribution
+    password: password1
   - username: user2
-    password: liberation
+    password: password2
   # Add more users as needed
 
 #### You don't need to change anything below unless you know what you're doing ####

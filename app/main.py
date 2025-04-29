@@ -17,8 +17,9 @@ from app.https import cert_file, key_file
 from app.logger import logger
 import logging
 import asyncio
+import uvicorn
 
-DEBUG_DELAY = 1  # seconds, simulate slow response
+DEBUG_DELAY = 0  # seconds, simulate slow response
 RATE_LIMITE = "100/hour"
 
 # Configs
@@ -64,13 +65,13 @@ if debug and DEBUG_DELAY > 0:
 
 if __name__ == "__main__":
     # Start web server
-    import uvicorn
+    uvicorn_app = "app.main:app" if __package__ else app
     uvicorn.run(
-        "app.main:app",
+        uvicorn_app,
         host=host,
         port=port,
         log_level=log_level,
-        reload=debug,
+        reload=debug and __package__,
         access_log=log_level == logging.DEBUG,
         ssl_keyfile=key_file,
         ssl_certfile=cert_file,

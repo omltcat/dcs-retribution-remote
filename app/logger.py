@@ -8,11 +8,11 @@ def setup_logger():
     """Return a logger with a default ColoredFormatter."""
     # Formatter for the stream handler with color codes
     stream_formatter = colorlog.ColoredFormatter(
-        "%(blue)s%(asctime)s %(log_color)s%(levelname)-8s%(reset)s %(message)s",
+        "%(cyan)s%(asctime)s %(log_color)s%(levelname)-8s%(reset)s %(message)s",
         datefmt='%Y-%m-%d %H:%M:%S',
         reset=True,
         log_colors={
-            "DEBUG": "cyan",
+            "DEBUG": "blue",
             "INFO": "green",
             "WARNING": "yellow",
             "ERROR": "red",
