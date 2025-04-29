@@ -23,7 +23,7 @@ You need to have an already working DCS server, with all the necessary server se
 This application will modify the existing server settings to run the uploaded missions.
 
 ### Configuration
-1. Download the [**latest release**](https://github.com/omltcat/dcs-retribution-remote) and extract to somewhere on your server.
+1. Download the [**latest release**](https://github.com/omltcat/dcs-retribution-remote/releases/latest/) and extract to somewhere on your server.
 2. Open the `config.yaml` and change the following:
     - 📁 `dcs_mission_dir`: The folder you put mission files, usually in `Saved Games`
     - ⚙️ `dcs_server_exe`: The path to `dcs_server_exe`
