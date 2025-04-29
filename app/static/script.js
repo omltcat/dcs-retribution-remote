@@ -1,5 +1,6 @@
 // @ts-nocheck
 document.addEventListener("DOMContentLoaded", () => {
+    let serverInfo = {};
     const appContainer = document.getElementById("app-container");
 
     // Helper function to get the Authorization header
@@ -34,19 +35,22 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // Fetch and update the server status
-    const fetchAndUpdateStatus = () => {
+    const fetchAndUpdateStatus = async () => {
         toggleRefreshSpinner(true);
-        return fetch("/api/v1/status", {
-            headers: { Authorization: getAuthHeader() },
-        })
-            .then(handleFetchError)
-            .then((response) => response.json())
-            .then((data) => {
-                updateUIWithServerStatus(data);
-                return data;
-            })
-            .catch((error) => console.error("Error fetching server status:", error))
-            .finally(() => toggleRefreshSpinner(false));
+        try {
+            const response = await fetch("/api/v1/status", {
+                headers: { Authorization: getAuthHeader() },
+            });
+            handleFetchError(response);
+            const data = await response.json();
+            updateUIWithServerStatus(data);
+            serverInfo = data;
+            return data;
+        } catch (error) {
+            console.error("Error fetching server status:", error);
+        } finally {``
+            toggleRefreshSpinner(false);
+        }
     };
 
     // Update the UI with server status
